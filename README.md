@@ -14,7 +14,6 @@ This repository provides instructions on utilizing my submitted models for sever
 
 The trained models are available for use in the prediction phase, packaged as docker images. This eliminates the need for Python package installations.
 
-> [!DOCKER IS NEEDED] <br>
 > Running the models requires a Docker installation. <br>
 > To install **Docker**, follow the official [instructions](https://docs.docker.com/get-docker/) <br>
 > To install the **NVIDIA Container Toolkit** follow the official [instrations](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) <br>
