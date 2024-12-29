@@ -33,24 +33,29 @@ Pull the docker image:
 ```
 The input preprocessed multi-parametric MRIs should be structured as standard BraTS dataset; i.e,.
 ```
-├── BraTS-GLI-02073-100
-│   ├── BraTS-GLI-02073-100-t1c.nii.gz
-│   ├── BraTS-GLI-02073-100-t1n.nii.gz
-│   ├── BraTS-GLI-02073-100-t2f.nii.gz
-│   └── BraTS-GLI-02073-100-t2w.nii.gz
-├── BraTS-GLI-02127-102
-│   ├── BraTS-GLI-02127-102-t1c.nii.gz
-│   ├── BraTS-GLI-02127-102-t1n.nii.gz
-│   ├── BraTS-GLI-02127-102-t2f.nii.gz
-│   └── BraTS-GLI-02127-102-t2w.nii.gz
-├── BraTS-GLI-02127-103
-│   ├── BraTS-GLI-02127-103-t1c.nii.gz
-│   ├── BraTS-GLI-02127-103-t1n.nii.gz
-│   ├── BraTS-GLI-02127-103-t2f.nii.gz
-│   └── BraTS-GLI-02127-103-t2w.nii.gz
+── in
+│   ├── BraTS-GLI-02711-100
+│   │   ├── BraTS-GLI-02711-100-t1c.nii.gz
+│   │   ├── BraTS-GLI-02711-100-t1n.nii.gz
+│   │   ├── BraTS-GLI-02711-100-t2f.nii.gz
+│   │   └── BraTS-GLI-02711-100-t2w.nii.gz
+│   ├── case_unknown-100
+│   │   ├── case_unknown-100-t1c.nii.gz
+│   │   ├── case_unknown-100-t1n.nii.gz
+│   │   ├── case_unknown-100-t2f.nii.gz
+│   │   └── case_unknown-100-t2w.nii.gz
+│   ├── random123
+│   │   ├── random123-t1c.nii.gz
+│   │   ├── random123-t1n.nii.gz
+│   │   ├── random123-t2f.nii.gz
+│   │   └── random123-t2w.nii.gz
+│   └── subject99_abc
+│       ├── subject99_abc-t1c.nii.gz
+│       ├── subject99_abc-t1n.nii.gz
+│       ├── subject99_abc-t2f.nii.gz
+│       └── subject99_abc-t2w.nii.gz
 ...
 ```
-Make sure that `"brats" in foldername.lower() == True` <br>
 To run the model, then:
 ```bash
   docker run --rm --gpus all --network none --memory="32g" -v <AbsPathInput>:/input/images -v <AbsPathOutput>:/output/pred --shm-size 2g astarakee/brats24_glipost:latest
@@ -63,19 +68,24 @@ The resulting segmentation masks in `.nii.gz` file format will be saved in `AbsP
 ```
 The input preprocessed multi-parametric MRIs should be structured as standard BraTS dataset; i.e,.
 ```
-├── BraTS-PED-00281-000
-│   ├── BraTS-PED-00281-000-t1c.nii.gz
-│   ├── BraTS-PED-00281-000-t1n.nii.gz
-│   ├── BraTS-PED-00281-000-t2f.nii.gz
-│   └── BraTS-PED-00281-000-t2w.nii.gz
-├── BraTS-PED-00282-000
-│   ├── BraTS-PED-00282-000-t1c.nii.gz
-│   ├── BraTS-PED-00282-000-t1n.nii.gz
-│   ├── BraTS-PED-00282-000-t2f.nii.gz
-│   └── BraTS-PED-00282-000-t2w.nii.gz
+├── in
+│   ├── BraTS-PED-00284-000
+│   │   ├── BraTS-PED-00284-000-t1c.nii.gz
+│   │   ├── BraTS-PED-00284-000-t1n.nii.gz
+│   │   ├── BraTS-PED-00284-000-t2f.nii.gz
+│   │   └── BraTS-PED-00284-000-t2w.nii.gz
+│   ├── sample_rand_23
+│   │   ├── sample_rand_23-t1c.nii.gz
+│   │   ├── sample_rand_23-t1n.nii.gz
+│   │   ├── sample_rand_23-t2f.nii.gz
+│   │   └── sample_rand_23-t2w.nii.gz
+│   └── testcase
+│       ├── testcase-t1c.nii.gz
+│       ├── testcase-t1n.nii.gz
+│       ├── testcase-t2f.nii.gz
+│       └── testcase-t2w.nii.gz
 ...
 ```
-Make sure that `"brats" in foldername.lower() == True` <br>
 ```bash
   docker run --rm --gpus all --network none --memory="32g" -v <AbsPathInput>:/input/images -v <AbsPathOutput>:/output/pred --shm-size 2g astarakee/brats24_peds:latest
 ```
@@ -87,14 +97,13 @@ The resulting segmentation masks in `.nii.gz` file format will be saved in `AbsP
 ```
 The input T1c MRIs should be structured as standard BraTS dataset; i.e,.
 ```
-├── BraTS-MEN-RT-0292-1
-│   └── BraTS-MEN-RT-0292-1_t1c.nii.gz
-├── BraTS-MEN-RT-0293-1
-│   └── BraTS-MEN-RT-0293-1_t1c.nii.gz
-├── BraTS-MEN-RT-0308-1
-│   └── BraTS-MEN-RT-0308-1_t1c.nii.gz
-└── BraTS-MEN-RT-0328-1
-    └── BraTS-MEN-RT-0328-1_t1c.nii.gz
+├── input
+│   ├── BraTS-MEN-RT-0328-1
+│   │   └── BraTS-MEN-RT-0328-1-t1c.nii.gz
+│   ├── subjectAZ76
+│   │   └── subjectAZ76-t1c.nii.gz
+│   └── unknow654
+│       └── unknow654-t1c.nii.gz
 ...
 ```
 ```bash
