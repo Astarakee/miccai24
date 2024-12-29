@@ -4,16 +4,17 @@ This repository provides instructions on utilizing my submitted models for sever
 
 ## Models
 
-- BraTS Adult Glioma Post-treatment segmentation (GLI)
-- BraTS Pediatric Glioma Pre-operative segmentation (PEDs)
-- BraTS Meningioma segmentation (MenRT)(BraTS/README.md)
-- AutoPET Multicenter Multitracer Generalization (AutoPET)
-- Head&Neck Tumor Segmentation for MR-guided RT (HNTSMRG)
+- BraTS Adult Glioma Post-treatment segmentation (GLI) [website](https://www.synapse.org/Synapse:syn53708249/wiki/627500)
+- BraTS Pediatric Glioma Pre-operative segmentation (PEDs) [website](https://www.synapse.org/Synapse:syn53708249/wiki/627505)
+- BraTS Meningioma segmentation (MenRT) [website](https://www.synapse.org/Synapse:syn53708249/wiki/627503)
+- AutoPET Multicenter Multitracer Generalization (AutoPET) [website](https://autopet-iii.grand-challenge.org/)
+- Head&Neck Tumor Segmentation for MR-guided RT (HNTSMRG) [website](https://hntsmrg24.grand-challenge.org/)
 
 ## Installation
 
 The trained models are available for use in the prediction phase, packaged as docker images. This eliminates the need for Python package installations.
 
+> **Docker is required!** <br>
 > Running the models requires a Docker installation. <br>
 > To install **Docker**, follow the official [instructions](https://docs.docker.com/get-docker/) <br>
 > To install the **NVIDIA Container Toolkit** follow the official [instrations](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) <br>
@@ -125,7 +126,7 @@ Note that the CT and PT filesnames for each subject should be identical; i.e,
 ```bash
   docker run --rm --gpus all --network none --memory="32g" -v <AbsPathInput>:/input -v <AbsPathInput>:/output --shm-size 2g astarakee/autopet24:latest
 ```
-The predicted segmentation masks will be saved as `.mha` format at `AbsPathInput/images/automated-petct-lesion-segmentation`
+The predicted segmentation masks will be saved as `.mha` format at `AbsPathOutput/images/automated-petct-lesion-segmentation`
 
 ### Head&Neck Tumor Segmentation for MR-guided RT
 Pull the dockers for task 1 (pre-treatment MRIs) and task 2 (mid-treatment MRIs):
@@ -136,4 +137,50 @@ Pull the dockers for task 1 (pre-treatment MRIs) and task 2 (mid-treatment MRIs)
   docker pull astarakee/hntsmrg_mid:latest
 ```
 Task 1 requires only pre-treatment T2w MRIs in the following structure:
-### TODO
+```
+in_path
+    ├── 101_preRT_T2.nii.gz
+    ├── MRI_PreRT_X12.nii.gz
+    └── random_name123.nii.gz
+    ...
+```
+The predicted masks in `.mha` format will be saved at `AbsPathOutput/mri-head-neck-segmentation` <br>
+Task 2 requires both mid-treatment T2w MRIs and registered segmentation masks of pretreatment in the following structure:
+```
+└── test_set
+    ├── mid_mri
+    │   ├── 13_midRT_T2.nii.gz
+    │   ├── randomXYZ.nii.gz
+    │   └── subject1.nii.gz
+    └── pre_mask_register
+        ├── 13_midRT_T2.nii.gz
+        ├── randomXYZ.nii.gz
+        └── subject1.nii.gz
+```
+The predicted masks in `.mha` format will be saved at `AbsPathOutput/mri-head-neck-segmentation` <br>
+
+## Reference
+The development of these models was done by using [nnUNet](https://github.com/MIC-DKFZ/nnUNet), [MedNeXt](https://github.com/MIC-DKFZ/MedNeXt), and [MONAI SegResNetDS](https://github.com/Project-MONAI/tutorials).
+
+## Citation
+If you use these models, please consider citing the peer-reviewed papers/preprints. <br>
+BraTS
+```
+TODO: will be added after LNCS publishes.
+```
+Head&Neck
+```
+TODO: will be added after LNCS publishes.
+```
+AutoPET
+```
+@misc{astaraki2024lesionsegmentationwholebodymultitracer,
+      title={Lesion Segmentation in Whole-Body Multi-Tracer PET-CT Images; a Contribution to AutoPET 2024 Challenge}, 
+      author={Mehdi Astaraki and Simone Bendazzoli},
+      year={2024},
+      eprint={2409.14475},
+      archivePrefix={arXiv},
+      primaryClass={eess.IV},
+      url={https://arxiv.org/abs/2409.14475}, 
+}
+```
